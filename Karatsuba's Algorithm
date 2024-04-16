@@ -6,10 +6,10 @@ Let's think about "how fast" we can multiply two numbers together. In elementary
 ### Example
 $$
 \begin{array}{r}
-    \phantom{0} 12 \\
-    \times\phantom{0} 34 \\
+    \; 12 \\
+    \times \; 34 \\
     \hline
-    \phantom{0} 48 \\
+    \; 48 \\
     360 \\
     \hline
     408
