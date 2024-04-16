@@ -6,10 +6,10 @@ Let's think about "how fast" we can multiply two numbers together. In elementary
 ### Example
 $$
 \begin{array}{r}
-    \; 12 \\
-    \times \; 34 \\
+    12 \\
+    \times 34 \\
     \hline
-    \; 48 \\
+    48 \\
     360 \\
     \hline
     408
@@ -98,3 +98,27 @@ Using the Master Theorem (whose steps I will skip), we get:
 $$T(n) = \Theta(n^{\lg 3}) = \Theta(n^{1.58...})$$
 
 We can safely conclude that Karatsuba's Algorithm takes less time than regular "schoolbook" multiplication -- since that's $\Theta(n^{2})$.
+
+## Pseudocode
+```pseudocode
+# A and B are multi-digit numbers represented by lists of single digit numbers
+
+function karatsuba( numA, numB ):
+    if either A or B is a single digit:
+        return A*B
+
+    else:
+        sp      = floor( minimum_digits( A, B ) / 2 )
+        A1,A0   = split A, sp digits from the right
+        B1,B0   = split B, sp digits from the right
+        k1      = karatsuba( A1, B1 )
+        k2      = karatsuba( A1 + A0, B1 + B0 )
+        k3      = karatsuba( A0, B0 )
+
+        ret     = ( 10^( 2 * sp ) * k1 ) + ( 10^( sp ) * ( k2 - k3 - k1 ) ) + k3
+
+        return ret
+```
+
+## Summary
+We multiply the first digits of the numbers, then we multiply the sum of the digits of each number, then we multiply the last digits of the numbers.
